@@ -35,7 +35,7 @@ RUN yum install -y libselinux-python \
                    libvirt-python \
                    && yum groupinstall -y "Virtualization Tools"
 RUN yum install -y python34 --nogpgcheck
-RUN pip install pip --upgrade && pip install setuptools --upgrade
+RUN pip install pip --upgrade && pip install setuptools --upgrade && pip install pyyaml --upgrade
 RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
 RUN printf "Host *\n    StrictHostKeyChecking no" > /root/.ssh/config
 ADD linchpin_workspace15 /root/linchpin_workspace
