@@ -35,7 +35,8 @@ RUN yum install -y libselinux-python \
                    libvirt-python \
                    && yum groupinstall -y "Virtualization Tools"
 RUN yum install -y python34 --nogpgcheck
-RUN pip install pip --upgrade && pip install setuptools --upgrade && pip install pyyaml --upgrade
+RUN pip install --force-reinstall pip==9.0.3 && pip install pyyaml>=3.12 --disable-pip-version-check
+RUN pip install pip --upgrade && pip install setuptools --upgrade
 RUN pip install linchpin && pip install linchpin[libvirt]
 RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
 RUN printf "Host *\n    StrictHostKeyChecking no" > /root/.ssh/config
