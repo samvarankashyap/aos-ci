@@ -36,6 +36,7 @@ RUN yum install -y libselinux-python \
                    && yum groupinstall -y "Virtualization Tools"
 RUN yum install -y python34 --nogpgcheck
 RUN pip install pip --upgrade && pip install setuptools --upgrade && pip install pyyaml --upgrade
+RUN pip install linchpin && pip install linchpin[libvirt]
 RUN ssh-keygen -f /root/.ssh/id_rsa -t rsa -N ''
 RUN printf "Host *\n    StrictHostKeyChecking no" > /root/.ssh/config
 ADD linchpin_workspace15 /root/linchpin_workspace
@@ -46,8 +47,8 @@ WORKDIR "/tmp/"
 #RUN git clone -b file_module_patch https://github.com/samvarankashyap/linchpin
 RUN git clone -b develop https://github.com/samvarankashyap/linchpin
 WORKDIR "/tmp/linchpin"
-RUN "$PWD/install.sh"
-RUN cd /tmp/linchpin && python /tmp/linchpin/setup.py install
+#RUN "$PWD/install.sh"
+
 WORKDIR "/root/linchpin_workspace/"
 #END: Linchpin specific workspace installations
 
